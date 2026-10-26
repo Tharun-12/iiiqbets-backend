@@ -21,6 +21,8 @@ const contactRoutes = require("./routes/contactRoutes");
 const serviceRoutes = require("./routes/serviceRoutes"); // <-- Imported new route
 const productRoutes = require("./routes/productRoutes");
 const careerRoutes = require("./routes/carrerRoutes");
+const blogRoutes = require("./routes/blogRoutes");
+
 
 
 
@@ -31,6 +33,7 @@ app.use("/api/contact", contactRoutes);
 app.use("/api/services", serviceRoutes); 
 app.use("/api/products", productRoutes);
 app.use("/api/careers", careerRoutes);
+app.use("/api/blogs", blogRoutes);
 
 // Health check endpoint
 app.get("/api/health", (req, res) => {
