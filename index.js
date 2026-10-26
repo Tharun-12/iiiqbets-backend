@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
+const path = require("path");
 const db = require("./db");
 
 const app = express();
@@ -11,17 +12,25 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+// Serve uploaded images statically
+// When you visit http://localhost:5000/uploads/image.jpg, it will load the image
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
+
 // Import routes
-// const contactRoutes = require("./routes/contactRoutes");
-// const distributorRoutes = require("./routes/distributorRoutes");
-// const superStockistRoutes = require("./routes/superstockistRoutes");
-// const dealerRoutes = require("./routes/delarRoutes");
+const contactRoutes = require("./routes/contactRoutes");
+const serviceRoutes = require("./routes/serviceRoutes"); // <-- Imported new route
+const productRoutes = require("./routes/productRoutes");
+const careerRoutes = require("./routes/carrerRoutes");
+
+
+
+
 
 // Use routes
-// app.use("/api/contact", contactRoutes);
-// app.use("/api/distributor", distributorRoutes);
-// app.use("/api/super-stockist", superStockistRoutes);
-// app.use("/api/dealer", dealerRoutes);
+app.use("/api/contact", contactRoutes);
+app.use("/api/services", serviceRoutes); 
+app.use("/api/products", productRoutes);
+app.use("/api/careers", careerRoutes);
 
 // Health check endpoint
 app.get("/api/health", (req, res) => {
@@ -41,8 +50,4 @@ app.use((err, req, res, next) => {
 // Start server
 app.listen(PORT, () => {
   console.log(`🚀 Server running on port ${PORT}`);
-  console.log(`📝 Contact API: http://localhost:${PORT}/api/contact`);
-  console.log(`📝 Distributor API: http://localhost:${PORT}/api/distributor`);
-  console.log(`📝 Super Stockist API: http://localhost:${PORT}/api/super-stockist`);
-  console.log(`📝 Dealer API: http://localhost:${PORT}/api/dealer`);
 });

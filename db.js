@@ -4,9 +4,9 @@ const db = mysql.createPool({
   host: "localhost",
   user: "root",
   password: "",
-  database: "assam-bloom",
-//   port: 4306,
-  port: 3306,
+  database: "iiiqbets",
+  port: 4306,
+//   port: 3306,
   waitForConnections: true,
   connectionLimit: 10,
   queueLimit: 0
